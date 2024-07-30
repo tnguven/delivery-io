@@ -1,0 +1,27 @@
+{
+  "name": "@katkin/root",
+  "version": "1.0.0",
+  "description": "Katkin interview task",
+  "author": "Tan Guven",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "pkg/*"
+  ],
+  "scripts": {
+    "purge:node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "test:all": "concurrently \"pnpm run test:server\" \"pnpm run test:client\"",
+    "test:server": "pnpm --filter=@katkin/server test",
+    "test:client": "pnpm --filter=@katkin/client test",
+    "preinstall": "npx only-allow pnpm",
+    "watch-client": "pnpm --filter=@katkin/client dev",
+    "watch-server": "pnpm --filter=@katkin/server start",
+    "start": "concurrently \"pnpm run watch-client\" \"pnpm run watch-server\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
